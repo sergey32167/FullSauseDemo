@@ -1,4 +1,4 @@
-package tests;
+package tests.gui;
 
 import BaseEntities.BaseTest;
 import org.testng.Assert;
@@ -12,8 +12,8 @@ import steps.ProductStep;
 public class SmokeTest extends BaseTest {
 
     @Test
-    public void criticalPathTest(){
-        CheckoutCompletionPage completionPage = new LoginPage(browsersService,true)
+    public void criticalPathTest() {
+        CheckoutCompletionPage completionPage = new LoginPage(browsersService, true)
                 .setUsername(correctUser.getUsername())
                 .setPassword(correctUser.getPassword())
                 .successLoginButtonClick()
@@ -31,18 +31,18 @@ public class SmokeTest extends BaseTest {
     }
 
     @Test
-    public void loginFailedTest(){
-        LoginPage loginPage = new LoginPage(browsersService,true)
+    public void loginFailedTest() {
+        LoginPage loginPage = new LoginPage(browsersService, true)
                 .setUsername(lockedUser.getUsername())
                 .setPassword(lockedUser.getPassword())
                 .loginButtonClick();
 
-        Assert.assertEquals(loginPage.getErrorMessage().getText().trim(),"Epic sadface: Sorry, this user has been locked out.");
+        Assert.assertEquals(loginPage.getErrorMessage().getText().trim(), "Epic sadface: Sorry, this user has been locked out.");
     }
 
     @Test
-    public void removeItemCartTest(){
-        ShoppingCartPage shoppingCartPage = new LoginPage(browsersService,true)
+    public void removeItemCartTest() {
+        ShoppingCartPage shoppingCartPage = new LoginPage(browsersService, true)
                 .setUsername(correctUser.getUsername())
                 .setPassword(correctUser.getPassword())
                 .successLoginButtonClick()
@@ -55,12 +55,12 @@ public class SmokeTest extends BaseTest {
     }
 
     @Test
-    public void criticalPathStepTest(){
-       CheckoutCompletionPage completionPage = new LoginStep(browsersService)
+    public void criticalPathStepTest() {
+        CheckoutCompletionPage completionPage = new LoginStep(browsersService)
                 .successLogin(correctUser)
                 .addItemToCard("Sauce Labs Backpack")
-               .moveToCart()
-               .compliteOrder();
+                .moveToCart()
+                .compliteOrder();
 
         Assert.assertEquals(completionPage.getCompletionMessage().trim(), "THANK YOU FOR YOUR ORDER");
     }
